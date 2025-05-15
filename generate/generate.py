@@ -18,10 +18,11 @@ define([__hexdec], [
 ])dnl
 define([__ip], 0)dnl
 define([ORG], [define([__ip], [__hexdec($1)])dnl])dnl
-define([__pr], [define([__ip], eval(__ip + ifelse($2, [], 1, $2)))$1])dnl
+define([__pr], [$1])dnl
 define([__hex], [format([%02X %02X], eval($1 % 256), eval($1 >> 8))])dnl
 define([LABEL], [define($1, __hex([__ip])) dnl])dnl
-define([TO], [$1])dnl""")
+define([ADDR], [$1])dnl
+define([BYTE], [__pr([$*])])""")
 
 cmds = set()
 stats = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'H': [], 'L': [], 'M': [], 'SP': [], 'PSW': []}
@@ -34,13 +35,6 @@ with open(script_dir + '/8080a.txt') as f:
 		if ' ' in name:
 			(name, *args) = re.split('[ ,]+', name)
 
-			if 'pp' in args or 'd8' in args:
-				length = 2
-			elif 'd16' in args:
-				length = 3
-			else:
-				length = 1
-
 			r = [x for x in args if x in stats]
 			if r:
 				if name not in cmds:
@@ -49,12 +43,12 @@ with open(script_dir + '/8080a.txt') as f:
 
 				match len(r):
 					case 1:
-						stats[r[0]] += [f'[__s_{name}], [__pr([{code}], {length})]']
+						stats[r[0]] += [f'[__s_{name}], [__pr([{code}])]']
 					case 2:
 						stats[r[0]] += [f'[__s_{name}], [define([__cmd], [__s_{name}_{r[0]}])]']
-						stats[r[1]] += [f'[__s_{name}_{r[0]}], [__pr([{code}], {length})]']
+						stats[r[1]] += [f'[__s_{name}_{r[0]}], [__pr([{code}])]']
 			else:
-				print(f'define([{name}], [__pr([{code}], {length})])dnl')
+				print(f'define([{name}], [__pr([{code}])])dnl')
 		else:
 			print(f'define([{name}], [__pr([{code}])])dnl')
 

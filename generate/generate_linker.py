@@ -9,9 +9,11 @@ print("""changequote([, ])dnl
 define([__ip], 0)dnl
 define([ORG], [])dnl])dnl
 define([__pr], [define([__ip], eval(__ip + ifelse($2, [], 1, $2)))$1])dnl
-define([__plusip], [[[eval($1 + __ip)]]])
+define([__hex], [format([%02X %02X], eval($1 % 256), eval($1 >> 8))])dnl
+define([__plusip], [[[__hex(eval($1 + __ip))]]])
 define([LABEL], [define[]($1, __plusip(__ip))])dnl
-define([TO], [])dnl""")
+define([ADDR], [])dnl
+define([BYTE], [__pr([], $#)])""")
 
 stats = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'H': [], 'L': [], 'M': [], 'SP': [], 'PSW': []}
 
