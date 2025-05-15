@@ -60,5 +60,5 @@ for key, values in stats.items():
 	print('])dnl')
 
 for x in range(0, 65535):
-	print(f'define([H{x:X}], [{x.to_bytes(2 if x > 255 else 1, "little").hex()}])')
+	print(f'define([H{x:X}], [{x.to_bytes(2 if x > 255 else 1, "little").hex()}])dnl')
 print()
