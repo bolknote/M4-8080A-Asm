@@ -42,4 +42,4 @@ for name in stats:
 	print(f'define([{name}],[])dnl')
 
 for x in range(0, 65535):
-	print(f'define([H{x:X}],[])dnl')
+	print(f'define([h{x:X}],[])dnl')
