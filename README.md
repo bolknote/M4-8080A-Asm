@@ -4,25 +4,23 @@ This project is an assembler for the Intel 8080A processor, implemented entirely
 
 ## Features
 
-* **Written in m4**: Leverages the power of the m4 macro processor for assembly and code generation.
-* **Two-pass assembly**: Address calculation and code generation are handled in separate passes.
-* **Hexadecimal only**: All numbers must be written in hexadecimal, using the `h` prefix (e.g., `hFF` instead of `FFh`).
-* **Macro-based syntax**: Uses macro-like constructs instead of traditional assembler directives.
-* **Custom byte sequences**: Arbitrary byte sequences are inserted using the `BYTE(...)` macro.
+* Full support for the i8080A instruction set.
 
 ## Syntax
 
 Some key differences from traditional assemblers:
 
-* Numbers must be specified as `hXX` (e.g., `h10` for hexadecimal 10).
+* All numbers must be specified in hexadecimal with the `h` prefix (e.g., `hFF`).
 * The start address is specified with `ORG(address)`.
 * Labels are declared with `LABEL(name)`, and their addresses are obtained via `ADDR(name)`.
-* Arbitrary bytes are inserted with `BYTE(...)`.
+* Arbitrary byte sequences are inserted using `BYTE(...)`.
+* Comments are added using the `COM(...)` construct.
 
 ### Example
 
 ```asm
 ORG(h1100)
+COM(This program prints "HELLO WORLD")
 LXI H, ADDR(TEXT)
 CALL hF818
 JMP hF86C
@@ -46,7 +44,7 @@ To assemble a program, use the provided `asm` script:
 * **Output codes in human-readable form:**
 
   ```
-  asm helloworld.m4 -
+  asm helloworld.m4 /dev/stdout
   ```
 
   This command prints the machine code to the console.
@@ -55,4 +53,3 @@ To assemble a program, use the provided `asm` script:
 
 * **m4** macro processor
 * **Python 3** (for code generation scripts)
-
