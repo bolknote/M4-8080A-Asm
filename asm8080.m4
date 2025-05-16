@@ -16,7 +16,9 @@ define([__pr], [$1])dnl
 define([__hex], [format([%02X %02X], eval($1 % 256), eval($1 >> 8))])dnl
 define([LABEL], [define($1, __hex([__ip])) dnl])dnl
 define([ADDR], [$1])dnl
-define([BYTE], [__pr([$*])])
+define([BYTE], [__pr([$*])])dnl
+define([COM], [])dnl
+changecom(COM)dnl
 define([ADD], [define([__cmd], [__s_ADD])])dnl
 define([ADI], [__pr([c6])])dnl
 define([ADC], [define([__cmd], [__s_ADC])])dnl

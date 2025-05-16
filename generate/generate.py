@@ -22,7 +22,9 @@ define([__pr], [$1])dnl
 define([__hex], [format([%02X %02X], eval($1 % 256), eval($1 >> 8))])dnl
 define([LABEL], [define($1, __hex([__ip])) dnl])dnl
 define([ADDR], [$1])dnl
-define([BYTE], [__pr([$*])])""")
+define([BYTE], [__pr([$*])])dnl
+define([COM], [])dnl
+changecom(COM)dnl""")
 
 cmds = set()
 stats = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'H': [], 'L': [], 'M': [], 'SP': [], 'PSW': []}

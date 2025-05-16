@@ -6,7 +6,8 @@ define([__hex], [format([%02X %02X], eval($1 % 256), eval($1 >> 8))])dnl
 define([__plusip], [[[__hex(eval($1 + __ip))]]])
 define([LABEL], [define[]($1, __plusip(__ip))])dnl
 define([ADDR], [])dnl
-define([BYTE], [__pr([], $#)])
+define([BYTE], [__pr([], $#)])dnl
+changecom(COM)dnl
 define([ADD],[__pr([],1)])dnl
 define([ADI],[__pr([],2)])dnl
 define([ADC],[__pr([],1)])dnl
