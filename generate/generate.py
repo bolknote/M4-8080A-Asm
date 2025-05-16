@@ -54,7 +54,7 @@ with open(script_dir + '/8080a.txt') as f:
 
 for key, values in stats.items():
 	print(f'define([{key}], [\nifelse(')
-	for line in set(values):
+	for line in sorted(set(values)):
 		print(f'    defn([__cmd]), {line},')
 	print('    [])')
 	print('])dnl')
