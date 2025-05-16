@@ -9,7 +9,7 @@ if [[ -z "$2" ]]; then
 	postproc() { grep -v '^ *$'; }
 else
 	filename="$2"	
-	if [[ "$filename" == "/dev/stdout" ]]; then
+	if [[ "$filename" == "/dev/stdout" || "$filename" == "-" ]]; then
 		postproc() { xxd -r -p | hexdump -C; }
 	else
 		postproc() { xxd -r -p > "$filename"; }
