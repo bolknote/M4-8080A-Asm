@@ -6,7 +6,14 @@ if [[ ! -f "$1" || -z "$1" ]]; then
 fi
 
 if [[ -z "$2" ]]; then
-	m4 asm8080.m4 <(m4 linker8080.m4 "$1") "$1" | grep -v '^ *$'
+	postproc() { grep -v '^ *$'; }
 else
-	m4 asm8080.m4 <(m4 linker8080.m4 "$1") "$1" | xxd -r -p > "$2"
+	filename="$2"	
+	if [[ "$filename" == "/dev/stdout" ]]; then
+		postproc() { xxd -r -p | hexdump -C; }
+	else
+		postproc() { xxd -r -p > "$filename"; }
+	fi
 fi
+
+m4 asm8080.m4 <(m4 linker8080.m4 "$1") "$1" | postproc

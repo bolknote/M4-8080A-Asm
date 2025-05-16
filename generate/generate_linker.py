@@ -35,11 +35,11 @@ with open(script_dir + '/8080a.txt') as f:
 				length = 1
 
 			if name not in names:
-				print(f'define([{name}], [__pr([], {length})])dnl')
+				print(f'define([{name}],[__pr([],{length})])dnl')
 				names.add(name)
 
 for name in stats:
-	print(f'define([{name}], [])dnl')
+	print(f'define([{name}],[])dnl')
 
 for x in range(0, 65535):
-	print(f'define([H{x:X}], [])dnl')
+	print(f'define([H{x:X}],[])dnl')
