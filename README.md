@@ -2,6 +2,9 @@
 
 This project is an assembler for the Intel 8080A processor, implemented entirely in **m4**. It translates a simplified assembly language into machine code suitable for execution on the 8080A or its Soviet analogs (such as those used in the Radio-86RK computer).
 
+This project was created **for fun** and as a way to explore how m4 works.
+
+
 ## Features
 
 * Full support for the i8080A instruction set.
